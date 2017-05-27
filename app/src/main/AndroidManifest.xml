@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.bignerdranch.android.osm">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE">
+    </uses-permission>
+
+    <application
+
+        android:allowBackup="true"
+        android:backupAgent="TheBackupAgent"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAIwPzRawqdT2OeTSj9PRIGw9SVflV86FZRt7k6vA"/>
+
+        <service android:name=".VibrateService"/>
+        <service
+            android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".SplashScreenActivity"
+            android:label="Ортостатический мониторинг">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Statistic"
+            android:label="Статистика"
+            android:parentActivityName=".MainActivity"
+            />
+        <activity
+            android:name=".MainActivity"
+            android:label="Ортостатический мониторинг"
+            />
+        <activity android:name=".LogInActivity"
+            />
+        <activity android:name=".SucEnter"
+            />
+        <activity
+
+            android:name=".NotePagerActivity"
+            android:label="Запись"
+            android:parentActivityName=".NoteListActivity">
+        </activity>
+        <activity
+            android:name=".NoteListActivity"
+            android:label="Записи"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity
+            android:name=".NoteSettings"
+            android:label="Настройки"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
+        <activity
+            android:name=".NoteInfo"
+            android:label="Инструкция"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".database.ExportImportDB"
+            />
+        <activity
+            android:name=".NoteVersion"
+            android:label="О версии"
+            android:parentActivityName=".NoteSettings"></activity>
+
+    </application>
+
+</manifest>

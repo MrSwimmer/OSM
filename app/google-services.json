@@ -1,0 +1,58 @@
+{
+  "project_info": {
+    "project_number": "187402771119",
+    "firebase_url": "https://osm2017-4690d.firebaseio.com",
+    "project_id": "osm2017-4690d",
+    "storage_bucket": "osm2017-4690d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187402771119:android:0db8e70981e3fb28",
+        "android_client_info": {
+          "package_name": "com.bignerdranch.android.osm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "187402771119-p6p0jligem0es6onnqgi07c71sqj983g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bignerdranch.android.osm",
+            "certificate_hash": "70522e94947bd5ffa67c11b1c811439826fbe45e"
+          }
+        },
+        {
+          "client_id": "187402771119-vvmbc8u3pl475ofrbl8d46i3kvoi3kjd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bignerdranch.android.osm",
+            "certificate_hash": "831b6a4eed7c2f068c95e51523215734f7b50a85"
+          }
+        },
+        {
+          "client_id": "187402771119-t23ocdamvnrt5f7crhbmg0uth8frq1ta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE8cadai9YKzNF6Iw4P2r4bBf0rT0v5pk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

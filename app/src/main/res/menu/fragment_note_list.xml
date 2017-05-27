@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--<item-->
+    <!--android:id="@+id/menu_item_new_note"-->
+    <!--android:icon="@android:drawable/ic_menu_add"-->
+    <!--android:title="@string/new_note"-->
+    <!--app:showAsAction="ifRoom|withText"/>-->
+    <item
+        android:id="@+id/menu_item_show_subtitle"
+        android:icon="@android:drawable/ic_menu_view"
+        android:title="@string/show_subtitle"
+        app:showAsAction="ifRoom"/>
+    <group android:id="@+id/menugroup">
+        <item
+            android:id="@+id/sortDate"
+            android:title="Сортировать по дате">
+            <menu>
+                <item
+                    android:id="@+id/sortDateV"
+                    android:title="По возрастанию"/>
+                <item
+                    android:id="@+id/sortDateU"
+                    android:title="По убыванию"/>
+            </menu>
+        </item>
+
+        <!--<item-->
+        <!--android:id="@+id/showOf"-->
+        <!--android:title="Результаты за ">-->
+        <!--<menu>-->
+        <!--<item-->
+        <!--android:id="@+id/showOfLastWeek"-->
+        <!--android:title="Последнюю неделю"/>-->
+        <!--<item-->
+        <!--android:id="@+id/showMonth"-->
+        <!--android:title="Последний месяц"/>-->
+        <!--</menu>-->
+        <!--</item>-->
+        <!--<item-->
+        <!--android:id="@+id/OnlyAfter"-->
+        <!--android:title="Только после">-->
+        <!--<menu>-->
+        <!--<item-->
+        <!--android:id="@+id/OnlyAfterSleep"-->
+        <!--android:title="Сна"/>-->
+        <!--<item-->
+        <!--android:id="@+id/OnlyAfterTrain"-->
+        <!--android:title="Тренировки"/>-->
+        <!--</menu>-->
+        <!--</item>-->
+        <item
+            android:id="@+id/SearchByDate"
+            android:title="Поиск по дате"/>
+    </group>
+</menu>
