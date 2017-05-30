@@ -39,11 +39,9 @@ public class expimp {
                         + "//databases//" + "noteBase.db";
                 String backupDBPath = "/OSM/noteBase.db";
                 File backupDB = new File(data, currentDBPath);
-
-
                 File currentDB = new File(sd, backupDBPath);
                 if (file != null)
-                    currentDB = file;
+                    backupDB = file;
                 FileChannel src = new FileInputStream(currentDB).getChannel();
                 FileChannel dst = new FileOutputStream(backupDB).getChannel();
                 dst.transferFrom(src, 0, src.size());

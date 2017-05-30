@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.widget.Toast;
 
 import com.bignerdranch.android.osm.LogInActivity;
+import com.bignerdranch.android.osm.SucEnter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,11 +16,14 @@ import java.nio.channels.FileChannel;
 
 public class ExportImportDB extends Activity {
     String operation = null;
-
+    File mFile = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
+        final Intent intent = getIntent();
+        operation = intent.getStringExtra("op");
+
 //        Intent intent = getIntent();
 //        operation = intent.getStringExtra("operation");
 //creating a new folder for the database to be backuped to
@@ -37,8 +41,12 @@ public class ExportImportDB extends Activity {
             Intent i = new Intent(ExportImportDB.this, LogInActivity.class);
             startActivity(i);
         }
-
-        //importDB();
+        if (operation == "imp") {
+            importDB();
+            Intent i = new Intent(ExportImportDB.this, SucEnter.class);
+            startActivity(i);
+        }
+        importDB();
 
     }
 

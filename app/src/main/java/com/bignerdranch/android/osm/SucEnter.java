@@ -42,7 +42,7 @@ public class SucEnter extends Activity {
         super.onCreate(savedInstanceState);
         final Intent intent = getIntent();
         Name = intent.getStringExtra("name");
-        Pass = intent.getStringExtra("pass");
+        //Pass = intent.getStringExtra("pass");
         mStorageRef = FirebaseStorage.getInstance().getReference();
         setContentView(R.layout.succes_enter);
         riversRef = mStorageRef.child(Name + "/noteBase.db");
@@ -55,10 +55,11 @@ public class SucEnter extends Activity {
             public void onClick(View v) {
                 if (R1.isChecked()) {
                     try {
-                        Toast.makeText(SucEnter.this, download().toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(SucEnter.this, download().toString(), Toast.LENGTH_SHORT).show();
                         //download().toString();
-                        //mExpimp.importDB(download());
+                        download();
                     } catch (IOException e) {
+                        Toast.makeText(SucEnter.this, "Егор", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
                 }
@@ -101,14 +102,18 @@ public class SucEnter extends Activity {
                 });
     }
 
-    public File download() throws IOException {
-        File localFile = File.createTempFile("noteBase", "db");
+    public void download() throws IOException {
+        final File localFile = new File(Environment.getDataDirectory(), "//data//" + "com.bignerdranch.android.osm"
+                + "//databases//" + "noteBase.db");
         riversRef.getFile(localFile)
                 .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                         // Successfully downloaded data to local file
-                        Toast.makeText(SucEnter.this, "Загрузка завершена успешно!", Toast.LENGTH_SHORT).show();
+//                        Intent i = new Intent(SucEnter.this, ExportImportDB.class);
+//                        i.putExtra("op", "imp");
+//                        startActivity(i);
+                        Toast.makeText(SucEnter.this, "Скачивание завершено", Toast.LENGTH_SHORT).show();
                         // ...
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -119,6 +124,5 @@ public class SucEnter extends Activity {
                 Toast.makeText(SucEnter.this, exception.toString(), Toast.LENGTH_SHORT).show();
             }
         });
-        return localFile;
     }
 }
