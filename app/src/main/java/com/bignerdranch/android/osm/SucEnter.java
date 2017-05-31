@@ -1,12 +1,14 @@
 package com.bignerdranch.android.osm;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -27,11 +30,12 @@ import java.io.IOException;
  * Created by Севастьян on 20.05.2017.
  */
 
-public class SucEnter extends Activity {
-    expimp mExpimp;
+public class SucEnter extends AppCompatActivity {
     StorageReference riversRef;
     String Name;
     String Pass;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private RadioButton R1;
     private RadioButton R2;
     private RadioButton R3;
@@ -40,6 +44,13 @@ public class SucEnter extends Activity {
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+            }
+        };
         final Intent intent = getIntent();
         Name = intent.getStringExtra("name");
         //Pass = intent.getStringExtra("pass");
@@ -58,6 +69,8 @@ public class SucEnter extends Activity {
                         //Toast.makeText(SucEnter.this, download().toString(), Toast.LENGTH_SHORT).show();
                         //download().toString();
                         download();
+                        Intent i = new Intent(SucEnter.this, MainActivity.class);
+                        startActivity(i);
                     } catch (IOException e) {
                         Toast.makeText(SucEnter.this, "Егор", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
@@ -79,10 +92,27 @@ public class SucEnter extends Activity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.succes_enter, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.log_out:
+                mAuth.signOut();
+                Intent i = new Intent(SucEnter.this, LogInActivity.class);
+                startActivity(i);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     public void upload() {
         final Uri file = Uri.fromFile(new File(Environment.getDataDirectory(), "//data//" + "com.bignerdranch.android.osm"
                 + "//databases//" + "noteBase.db"));
-
+        Toast.makeText(SucEnter.this, "Идет загрузка", Toast.LENGTH_SHORT).show();
         riversRef.putFile(file)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -96,13 +126,14 @@ public class SucEnter extends Activity {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         // Handle unsuccessful uploads
-                        Toast.makeText(SucEnter.this, exception.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SucEnter.this, "Ошибка!", Toast.LENGTH_SHORT).show();
                         // ...
                     }
                 });
     }
 
     public void download() throws IOException {
+        Toast.makeText(SucEnter.this, "Идет загрузка", Toast.LENGTH_SHORT).show();
         final File localFile = new File(Environment.getDataDirectory(), "//data//" + "com.bignerdranch.android.osm"
                 + "//databases//" + "noteBase.db");
         riversRef.getFile(localFile)
@@ -113,7 +144,7 @@ public class SucEnter extends Activity {
 //                        Intent i = new Intent(SucEnter.this, ExportImportDB.class);
 //                        i.putExtra("op", "imp");
 //                        startActivity(i);
-                        Toast.makeText(SucEnter.this, "Скачивание завершено", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SucEnter.this, "Скачивание завершено!", Toast.LENGTH_SHORT).show();
                         // ...
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -125,4 +156,6 @@ public class SucEnter extends Activity {
             }
         });
     }
+
+
 }

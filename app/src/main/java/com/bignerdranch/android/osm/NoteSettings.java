@@ -30,6 +30,23 @@ public class NoteSettings extends AppCompatActivity {
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        mAuthListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if (user != null) {
+//                    String email = user.getEmail();
+//                    Intent i = new Intent(LogInActivity.this, SucEnter.class);
+//                    i.putExtra("name", email);
+//                    startActivity(i);
+//                    // User is signed in
+//                } else {
+//                    // User is signed out
+//                }
+//                // ...
+//            }
+
         setContentView(R.layout.settings_note);
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-3781095842244998/9275756860");
         mAdView = (AdView) findViewById(R.id.adViewtwo);

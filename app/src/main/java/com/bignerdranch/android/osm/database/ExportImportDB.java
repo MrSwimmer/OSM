@@ -102,8 +102,8 @@ public class ExportImportDB extends Activity {
                 dst.transferFrom(src, 0, src.size());
                 src.close();
                 dst.close();
-                Toast.makeText(getBaseContext(), "Бэкап данных выполнен!",
-                        Toast.LENGTH_LONG).show();
+//                Toast.makeText(getBaseContext(), "Бэкап данных выполнен!",
+//                        Toast.LENGTH_LONG).show();
 
             }
         } catch (Exception e) {
