@@ -4,8 +4,10 @@ package com.bignerdranch.android.osm;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +16,8 @@ import com.bignerdranch.android.osm.database.ExportImportDB;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Created by Севастьян on 08.03.2017.
@@ -21,6 +25,9 @@ import com.google.android.gms.ads.MobileAds;
 
 public class NoteSettings extends AppCompatActivity {
     private static final String DIALOG_DATE = "DialogDate";
+    FirebaseUser user;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private TextView mButton;
     private TextView mMark;
     private TextView mEnterRegButton;
@@ -28,9 +35,39 @@ public class NoteSettings extends AppCompatActivity {
     private TextView mVer;
     private AdView mAdView;
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.settings_note);
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    String email = user.getEmail();
+                    Log.i("LOG", email);
+                    mEnterRegButton.setText("Вход выполнен!\n" + email);
+                    // User is signed in
+                } else {
+                    // User is signed out
+                }
+                // ...
+            }
+        };
 //        mAuthListener = new FirebaseAuth.AuthStateListener() {
 //            @Override
 //            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -47,7 +84,7 @@ public class NoteSettings extends AppCompatActivity {
 //                // ...
 //            }
 
-        setContentView(R.layout.settings_note);
+
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-3781095842244998/9275756860");
         mAdView = (AdView) findViewById(R.id.adViewtwo);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -99,6 +136,5 @@ public class NoteSettings extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
     }
-
 
 }
