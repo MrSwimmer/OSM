@@ -19,19 +19,21 @@ import com.google.firebase.auth.FirebaseUser;
  * Created by Севастьян on 13.05.2017.
  */
 
-public class LogInActivity extends Activity implements View.OnClickListener {
+public class RegistrationActivity extends Activity implements View.OnClickListener {
     String action = "auth";
     FirebaseUser user;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private EditText Email;
     private EditText Password;
+    //private EditText PasswordRepeat;
 
     @Override
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
+
     @Override
     public void onStop() {
         super.onStop();
@@ -39,10 +41,11 @@ public class LogInActivity extends Activity implements View.OnClickListener {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
+        setContentView(R.layout.registration);
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -50,7 +53,7 @@ public class LogInActivity extends Activity implements View.OnClickListener {
                 user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     String email = user.getEmail();
-                    Intent i = new Intent(LogInActivity.this, SucEnter.class);
+                    Intent i = new Intent(RegistrationActivity.this, SucEnter.class);
                     i.putExtra("name", email);
                     i.putExtra("action", action);
                     startActivity(i);
@@ -63,19 +66,26 @@ public class LogInActivity extends Activity implements View.OnClickListener {
         };
         Email = (EditText) findViewById(R.id.et_email);
         Password = (EditText) findViewById(R.id.et_password);
+        //PasswordRepeat = (EditText) findViewById(R.id.rep_pass);
         findViewById(R.id.btn_sign_in).setOnClickListener(this);
-        findViewById(R.id.btn_registration).setOnClickListener(this);
+
+
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_sign_in && Email.toString() != null && Password.toString() != null) {
-            SignIn(Email.getText().toString(), Password.getText().toString());
-        } else if (v.getId() == R.id.btn_registration) {
-            Intent i = new Intent(LogInActivity.this, RegistrationActivity.class);
-            startActivity(i);
-            //Registration(Email.getText().toString(), Password.getText().toString());
+            //if(Password.toString().equals(PasswordRepeat.toString()))
+            Registration(Email.getText().toString(), Password.getText().toString());
+//            else
+//                Toast.makeText(RegistrationActivity.this, "Ошибка!", Toast.LENGTH_SHORT).show();
         }
+        //SignIn(Email.getText().toString(), Password.getText().toString());
+//        } else if (v.getId() == R.id.btn_registration) {
+//            Intent i = new Intent(RegistrationActivity.this, .class);
+//            startActivity(i);
+//            //Registration(Email.getText().toString(), Password.getText().toString());
+//        }
     }
 
     public void SignIn(String email, String password) {
@@ -83,31 +93,27 @@ public class LogInActivity extends Activity implements View.OnClickListener {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(LogInActivity.this, "Вход выполнен!", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(LogInActivity.this, SucEnter.class);
+                    Toast.makeText(RegistrationActivity.this, "Вход выполнен!", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(RegistrationActivity.this, SucEnter.class);
                     i.putExtra("name", Email.getText().toString());
                     i.putExtra("pass", Password.getText().toString());
                     startActivity(i);
                 } else {
-                    Toast.makeText(LogInActivity.this, "Ошибка входа!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Ошибка входа!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     public void Registration(final String email, String password) {
+        action = "reg";
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     user.sendEmailVerification();
-                    action = "reg";
-                    Toast.makeText(LogInActivity.this, "Регистрация прошла успешно!\n" +
+                    Toast.makeText(RegistrationActivity.this, "Регистрация прошла успешно!\n" +
                             "Письмо с подтверждением отправлено вам на почту", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(LogInActivity.this, SucEnter.class);
-                    i.putExtra("name", email);
-                    i.putExtra("action", action);
-                    startActivity(i);
 //                    mAuthListener = new FirebaseAuth.AuthStateListener() {
 //                        @Override
 //                        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -122,7 +128,7 @@ public class LogInActivity extends Activity implements View.OnClickListener {
 //                        }
 //                    };
                 } else {
-                    Toast.makeText(LogInActivity.this, "Такой пользователь уже существует!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Такой пользователь уже существует!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

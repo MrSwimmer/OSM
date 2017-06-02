@@ -42,6 +42,10 @@
             android:parentActivityName=".MainActivity"
             />
         <activity
+            android:name=".RegistrationActivity"
+            android:parentActivityName=".LogInActivity"
+            />
+        <activity
             android:name=".MainActivity"
             android:label="Ортостатический мониторинг"
             />
@@ -49,6 +53,7 @@
                   android:parentActivityName=".MainActivity"
             />
         <activity android:name=".SucEnter"
+                  android:label=""
                   android:parentActivityName=".MainActivity"
             />
         <activity

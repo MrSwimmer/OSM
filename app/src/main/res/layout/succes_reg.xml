@@ -13,19 +13,19 @@
         android:layout_marginTop="20dp"
         android:allowUndo="false"
         android:elevation="1dp"
-        android:text="Вход выполен!"
+        android:text="Регистрация прошла успешно!"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@color/colorAccent"
-        android:textSize="30sp"/>
+        android:textSize="24sp"/>
 
     <TextView
         android:id="@+id/text_enter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Вы успешно вошли в систему.
-В облачном хранилище у вас уже имеются данные. Хотите ли вы их использовать как основные?
+        android:text="Вы успешно зарегестрировались в системе.
+Вы можете использовать облачное хранилище, для хранения ваших записей.
 Выберите нужный вариант."
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="16sp"/>
@@ -34,15 +34,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp">
-
-        <RadioButton
-            android:id="@+id/r1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="true"
-            android:text="Заменить текущие данные данными из облака"
-            android:textSize="16sp"/>
 
         <RadioButton
             android:id="@+id/radioSwap2"

@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -33,7 +35,8 @@ import java.io.IOException;
 public class SucEnter extends AppCompatActivity {
     StorageReference riversRef;
     String Name;
-    String Pass;
+    String Action;
+    FirebaseUser user;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private RadioButton R1;
@@ -53,17 +56,38 @@ public class SucEnter extends AppCompatActivity {
         };
         final Intent intent = getIntent();
         Name = intent.getStringExtra("name");
-        //Pass = intent.getStringExtra("pass");
+        Action = intent.getStringExtra("action");
+        Log.i("LOG", Action);
+
+        if (Action.equals("reg")) {
+            setContentView(R.layout.succes_reg);
+        } else
+            setContentView(R.layout.succes_enter);
+
         mStorageRef = FirebaseStorage.getInstance().getReference();
-        setContentView(R.layout.succes_enter);
+
         riversRef = mStorageRef.child(Name + "/noteBase.db");
-        R1 = (RadioButton) findViewById(R.id.radioSwap1);
+        R1 = (RadioButton) findViewById(R.id.r1);
         R2 = (RadioButton) findViewById(R.id.radioSwap2);
         R3 = (RadioButton) findViewById(R.id.radioSwap3);
+//        mAuthListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//             user = firebaseAuth.getCurrentUser();
+//            if (user.isEmailVerified() ) {
+//                Toast.makeText(SucEnter.this, "Аккаунт подтвержден!" ,  Toast.LENGTH_SHORT).show();
+//            } else {
+//                Toast.makeText(SucEnter.this, "Подтвердите аккаунт!" ,  Toast.LENGTH_SHORT).show();
+//                Intent i = new Intent(SucEnter.this, MainActivity.class);
+//                startActivity(i);
+//            }
+//        }
+//    };
         mButton = (Button) findViewById(R.id.NextBut);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!Action.equals("reg"))
                 if (R1.isChecked()) {
                     try {
                         //Toast.makeText(SucEnter.this, download().toString(), Toast.LENGTH_SHORT).show();
@@ -131,7 +155,6 @@ public class SucEnter extends AppCompatActivity {
                     }
                 });
     }
-
     public void download() throws IOException {
         Toast.makeText(SucEnter.this, "Идет загрузка", Toast.LENGTH_SHORT).show();
         final File localFile = new File(Environment.getDataDirectory(), "//data//" + "com.bignerdranch.android.osm"
@@ -156,6 +179,4 @@ public class SucEnter extends AppCompatActivity {
             }
         });
     }
-
-
 }
