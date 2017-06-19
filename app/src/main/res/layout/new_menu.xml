@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="114dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#cccccc"
+        android:scaleType="center">
+    </Button>
+
+    <Button
+        android:id="@+id/instruction"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/statistic"
+        android:background="#cccccc"
+        android:scaleType="center">
+    </Button>
+
+
+    <Button
+        android:id="@+id/new_note"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView5"
+        android:background="#cccccc"
+        android:scaleType="center"
+        android:text="Новая запись"
+        android:textColor="@android:color/white"
+        android:textSize="24sp">
+    </Button>
+
+    <Button
+        android:id="@+id/all_note"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/new_note"
+        android:background="#cccccc"
+        android:scaleType="center">
+    </Button>
+
+    <Button
+        android:id="@+id/statistic"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/all_note"
+        android:background="#cccccc"
+        android:scaleType="center">
+    </Button>
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/instruction"
+        android:background="#cccccc"
+        android:scaleType="center">
+    </Button>
+</RelativeLayout>

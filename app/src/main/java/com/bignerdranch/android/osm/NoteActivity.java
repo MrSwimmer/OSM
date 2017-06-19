@@ -24,6 +24,6 @@ public class NoteActivity extends SingleFragmentActivity {
     protected Fragment createFragment() {
         UUID noteId = (UUID) getIntent()
                 .getSerializableExtra(EXTRA_NOTE_ID);
-        return NoteFragment.newInstance(noteId);
+        return NewNoteFragment.newInstance(noteId);
     }
 }

@@ -40,7 +40,7 @@ public class NotePagerActivity extends AppCompatActivity {
             @Override
             public Fragment getItem(int position) {
                 Note note = mNotes.get(position);
-                return NoteFragment.newInstance(note.getId());
+                return NewNoteFragment.newInstance(note.getId());
             }
 
             @Override

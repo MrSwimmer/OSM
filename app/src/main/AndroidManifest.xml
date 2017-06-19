@@ -46,6 +46,8 @@
             android:parentActivityName=".LogInActivity"
             />
         <activity
+            android:name=".NewMain"/>
+        <activity
             android:name=".MainActivity"
             android:label="Ортостатический мониторинг"
             />
