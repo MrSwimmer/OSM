@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class SplashScreenActivity extends Activity {
     FirebaseUser user;
     private String[] tip = new String[3];
     private TextView mTextView;
+    private ImageView mImageView;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private StorageReference mStorageRef;
@@ -70,8 +72,10 @@ public class SplashScreenActivity extends Activity {
                 // ...
             }
         };
-        setContentView(R.layout.splash_screen);
+        setContentView(R.layout.new_splash);
         mTextView = (TextView) findViewById(R.id.splash_tip);
+        mImageView = (ImageView) findViewById(R.id.imageView);
+        mImageView.setImageResource(R.drawable.osm);
         int max = 2;
         mTextView.setText(tip[(int) (Math.random() * ++max)]);
         new Handler().postDelayed(new Runnable() {

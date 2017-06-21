@@ -6,10 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 
 /**
  * Created by Севастьян on 07.03.2017.
@@ -22,6 +21,7 @@ public class MainActivity extends Activity {
     private Button mInfoButton;
     private AdView mAdView;
     private Button mStatButton;
+    private ImageView mImageView;
     private TheBackupAgent agent;
 
     @Override
@@ -29,12 +29,14 @@ public class MainActivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3781095842244998/4103854063");
-        mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        mNewButton = (Button) findViewById(R.id.new_button);
+        setContentView(R.layout.new_menu);
+//        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3781095842244998/4103854063");
+//        mAdView = (AdView) findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
+        mImageView = (ImageView) findViewById(R.id.imageView2);
+        mImageView.setImageResource(R.drawable.osmr);
+        mNewButton = (Button) findViewById(R.id.new_note);
         mNewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +51,7 @@ public class MainActivity extends Activity {
 //                startService(intentVibrate);
             }
         });
-        mViewButton = (Button) findViewById(R.id.view_button);
+        mViewButton = (Button) findViewById(R.id.all_note);
         mViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +59,7 @@ public class MainActivity extends Activity {
                 startActivity(i);
             }
         });
-        mSettings = (Button) findViewById(R.id.main_settings);
+        mSettings = (Button) findViewById(R.id.settings);
         mSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +67,7 @@ public class MainActivity extends Activity {
                 startActivity(i);
             }
         });
-        mInfoButton = (Button) findViewById(R.id.info_button);
+        mInfoButton = (Button) findViewById(R.id.instruction);
         mInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +75,7 @@ public class MainActivity extends Activity {
                 startActivity(i);
             }
         });
-        mStatButton = (Button) findViewById(R.id.stat_button);
+        mStatButton = (Button) findViewById(R.id.statistic);
         mStatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
