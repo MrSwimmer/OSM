@@ -11,7 +11,8 @@
                 android:id="@+id/scroller"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:fillViewport="true">
+                android:fillViewport="true"
+        >
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                       android:layout_width="match_parent"
@@ -20,6 +21,7 @@
                       android:paddingLeft="10dp"
                       android:paddingRight="10dp"
                       android:paddingStart="10dp"
+
                       android:paddingTop="10dp">
 
             <TextView
@@ -95,19 +97,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/WhatUsing2"
                 android:textSize="17dp"/>
-
-            <ImageView
-                android:id="@+id/screen_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/screen_one"/>
-
-            <ImageView
-                android:id="@+id/screentwo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/screentwo"/>
         </LinearLayout>
+
     </ScrollView>
 
     <com.google.android.gms.ads.AdView

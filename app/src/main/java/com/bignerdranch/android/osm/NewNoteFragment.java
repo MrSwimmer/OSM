@@ -48,6 +48,7 @@ public class NewNoteFragment extends Fragment {
     private LinearLayout InfoZone;
     private LinearLayout Chss1, Chss2;
     private EditText mPsit;
+    private Boolean sec = true;
     private EditText mPstand;
     private TextView mResView;
     private ScrollView mScrollView;
@@ -81,7 +82,7 @@ public class NewNoteFragment extends Fragment {
         Bitmap b = Bitmap.createBitmap(450, 450, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(b);
         Paint paint = new Paint();
-        paint.setColor(Color.parseColor("#c4c4c4"));
+        paint.setColor(Color.parseColor("#efefef"));
         paint.setStrokeWidth(20);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
@@ -92,26 +93,27 @@ public class NewNoteFragment extends Fragment {
 
         switch (z) {
             case 1:
-                paint.setColor(Color.parseColor("#28a81c"));
+                paint.setColor(Color.parseColor("#c0e637"));
                 canvas.drawCircle(225, 225, 205, paint);
                 break;
             case 2:
-                paint.setColor(Color.parseColor("#1210a3"));
+                paint.setColor(Color.parseColor("#55bbeb"));
                 canvas.drawCircle(225, 225, 175, paint);
                 break;
             case 3:
-                paint.setColor(Color.parseColor("#f7cc20"));
+                paint.setColor(Color.parseColor("#f0d73c"));
                 canvas.drawCircle(225, 225, 145, paint);
                 break;
             case 4:
-                paint.setColor(Color.parseColor("#db0808"));
+                paint.setColor(Color.parseColor("#e76660"));
                 canvas.drawCircle(225, 225, 115, paint);
                 break;
         }
         paint.setTextAlign(Paint.Align.CENTER);
-        paint.setStrokeWidth(8);
+        paint.setStrokeWidth(1);
         paint.setColor(Color.parseColor("#FFC95644"));
         paint.setTextSize(60);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
         canvas.drawText(s, 225, 225 + (paint.getTextSize() / 3), paint);
         iv2.setImageBitmap(b);
     }
@@ -121,7 +123,7 @@ public class NewNoteFragment extends Fragment {
         Canvas canvas = new Canvas(b);
         Paint paint = new Paint();
         paint.setColor(Color.parseColor("#c4c4c4"));
-        paint.setStrokeWidth(20);
+        paint.setStrokeWidth(3);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         canvas.drawCircle(150, 150, 140, paint);
@@ -133,7 +135,8 @@ public class NewNoteFragment extends Fragment {
         oval.set(10, 10, 290, 290);
         canvas.drawArc(oval, 270, ((i * 360) / 60), false, paint);
         paint.setTextAlign(Paint.Align.CENTER);
-        paint.setStrokeWidth(8);
+        paint.setStrokeWidth(1);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setColor(Color.parseColor("#FFC95644"));
         paint.setTextSize(80);
         canvas.drawText("" + (i / 60) + ":" + i, 150, 150 + (paint.getTextSize() / 3), paint);
@@ -222,11 +225,19 @@ public class NewNoteFragment extends Fragment {
                 }
             }
         });
-        mButtonStart = (ImageView) v.findViewById(R.id.buttonStart);
+        mButtonStart = (ImageView) v.findViewById(R.id.button_start);
         mButtonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onStartClick();
+                if (sec) {
+                    onStartClick();
+                    mButtonStart.setImageResource(R.drawable.stop);
+                    sec = !sec;
+                } else {
+                    onStopClick();
+                    mButtonStart.setImageResource(R.drawable.start);
+                    sec = !sec;
+                }
             }
         });
 //        mButtonStop = (Button) findViewById(R.id.buttonStop);
@@ -236,13 +247,13 @@ public class NewNoteFragment extends Fragment {
 //                onStopClick();
 //            }
 //        });
-        mButtonReset = (ImageView) v.findViewById(R.id.buttonStop);
-        mButtonReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onStopClick();
-            }
-        });
+//        mButtonReset = (ImageView) v.findViewById(R.id.buttonStop);
+//        mButtonReset.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onStopClick();
+//            }
+//        });
 
         mPsit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -337,6 +348,37 @@ public class NewNoteFragment extends Fragment {
         mScrollView = (ScrollView) v.findViewById(R.id.scroll);
         mSaveAll = (Button) v.findViewById(R.id.save);
         AboutZone = (TextView) v.findViewById(R.id.textLetZone);
+        if (mNote.getPsit() != null && mNote.getPstand() != null) {
+            mZoneBallView.setVisibility(View.VISIBLE);
+            secondCircularImageBar(mZoneBallView, mNote.getZone(), mNote.getPoint());
+            mButtonDate.setVisibility(View.VISIBLE);
+            mText16.setVisibility(View.VISIBLE);
+            mRadioGroup.setVisibility(View.VISIBLE);
+            mButtonDate.setVisibility(View.VISIBLE);
+            mRec.setVisibility(View.VISIBLE);
+            InfoZone.setVisibility(View.VISIBLE);
+            mResView.setVisibility(View.VISIBLE);
+            mSaveAll.setVisibility(View.VISIBLE);
+            switch (mNote.getZone()) {
+                case 1:
+                    Zone.setText(R.string.zone_1t);
+                    AboutZone.setText(R.string.zone_1);
+                    break;
+                case 2:
+                    Zone.setText(R.string.zone_2t);
+                    AboutZone.setText(R.string.zone_2);
+                    break;
+                case 3:
+                    Zone.setText(R.string.zone_3t);
+                    AboutZone.setText(R.string.zone_3);
+                    break;
+                case 4:
+                    Zone.setText(R.string.zone_4t);
+                    AboutZone.setText(R.string.zone_4);
+                    break;
+            }
+            mScrollView.scrollTo((int) mZoneBallView.getX(), (int) mZoneBallView.getY() - 70);
+        }
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -371,7 +413,7 @@ public class NewNoteFragment extends Fragment {
                             AboutZone.setText(R.string.zone_4);
                             break;
                     }
-                    mScrollView.scrollTo((int) mZoneBallView.getX(), (int) mZoneBallView.getY());
+                    mScrollView.scrollTo((int) mZoneBallView.getX(), (int) mZoneBallView.getY() - 70);
                 }
             }
         });
@@ -385,6 +427,7 @@ public class NewNoteFragment extends Fragment {
 //        mPointsView = (TextView) v.findViewById(R.id.PointsView);
 
         if (mNote.getPsit() != null && mNote.getPstand() != null) {
+            mScrollView.scrollTo((int) mZoneBallView.getX(), (int) mZoneBallView.getY());
             secondCircularImageBar(mZoneBallView, mNote.getZone(), mNote.getPoint());
 //            mPointsView.setText(mNote.getPoint());
 //            mZoneView.setText(Integer.toString(mNote.getZone()));

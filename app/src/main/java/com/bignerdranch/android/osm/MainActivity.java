@@ -5,24 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-
-import com.google.android.gms.ads.AdView;
+import android.widget.LinearLayout;
 
 /**
  * Created by Севастьян on 07.03.2017.
  */
 public class MainActivity extends Activity {
     private static final String TAG = "tag";
-    private static Button mNewButton;
-    private Button mViewButton;
-    private Button mSettings;
-    private Button mInfoButton;
-    private AdView mAdView;
-    private Button mStatButton;
+    private static LinearLayout mNewButton;
+    private LinearLayout mViewButton;
+    private LinearLayout mSettings;
+    private LinearLayout mInfoButton;
+    private LinearLayout mStatButton;
     private ImageView mImageView;
-    private TheBackupAgent agent;
+    private ImageView Exit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +33,8 @@ public class MainActivity extends Activity {
 //        mAdView.loadAd(adRequest);
         mImageView = (ImageView) findViewById(R.id.imageView2);
         mImageView.setImageResource(R.drawable.osmr);
-        mNewButton = (Button) findViewById(R.id.new_note);
+
+        mNewButton = (LinearLayout) findViewById(R.id.new_note);
         mNewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +49,7 @@ public class MainActivity extends Activity {
 //                startService(intentVibrate);
             }
         });
-        mViewButton = (Button) findViewById(R.id.all_note);
+        mViewButton = (LinearLayout) findViewById(R.id.all_note);
         mViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +57,7 @@ public class MainActivity extends Activity {
                 startActivity(i);
             }
         });
-        mSettings = (Button) findViewById(R.id.settings);
+        mSettings = (LinearLayout) findViewById(R.id.settings);
         mSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +65,7 @@ public class MainActivity extends Activity {
                 startActivity(i);
             }
         });
-        mInfoButton = (Button) findViewById(R.id.instruction);
+        mInfoButton = (LinearLayout) findViewById(R.id.instruction);
         mInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +73,7 @@ public class MainActivity extends Activity {
                 startActivity(i);
             }
         });
-        mStatButton = (Button) findViewById(R.id.statistic);
+        mStatButton = (LinearLayout) findViewById(R.id.statistic);
         mStatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

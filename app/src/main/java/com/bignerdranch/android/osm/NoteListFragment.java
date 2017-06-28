@@ -3,7 +3,6 @@ package com.bignerdranch.android.osm;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -38,6 +38,7 @@ public class NoteListFragment extends Fragment {
     public String than = null;
     int z1 = 0, z2 = 0, z3 = 0, z4 = 0;
     float midball = 0;
+    private LinearLayout LayoutZone;
     private NoteAdapter mAdapter;
     private RecyclerView mNoteRecyclerView;
     private boolean mSubtitleVisible;
@@ -53,12 +54,9 @@ public class NoteListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_note_list, container,
-                false);
-        mNoteRecyclerView = (RecyclerView) view
-                .findViewById(R.id.note_recycler_view);
-        mNoteRecyclerView.setLayoutManager(new LinearLayoutManager
-                (getActivity()));
+        View view = inflater.inflate(R.layout.fragment_note_list, container, false);
+        mNoteRecyclerView = (RecyclerView) view.findViewById(R.id.note_recycler_view);
+        mNoteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         if (savedInstanceState != null) {
             mSubtitleVisible = savedInstanceState.getBoolean
                     (SAVED_SUBTITLE_VISIBLE);
@@ -66,7 +64,6 @@ public class NoteListFragment extends Fragment {
         updateUI();
         return view;
     }
-
     @Override
     public void onResume() {
 
@@ -215,6 +212,7 @@ public class NoteListFragment extends Fragment {
         public NoteHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            LayoutZone = (LinearLayout) itemView.findViewById(R.id.layout_zone);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_z_date_text_view);
             mRadio = (TextView) itemView.findViewById(R.id.list_item_z_radio_text_view);
             mPoints = (TextView) itemView.findViewById(R.id.list_item_z_point);
@@ -223,7 +221,6 @@ public class NoteListFragment extends Fragment {
 
         public void bindNote(Note note) {
             mNote = note;
-
             mDateTextView.setText(mNote.getDateForm());
             if (mNote.isRad()) {
                 mRadio.setText("После сна");
@@ -240,19 +237,19 @@ public class NoteListFragment extends Fragment {
                 mZone.setText(Integer.toString(mNote.getZone()));
                 switch (mNote.getZone()) {
                     case 1:
-                        mZone.setTextColor(Color.rgb(66, 197, 58));
+                        LayoutZone.setBackgroundResource(R.drawable.oval_green);
                         z1++;
                         break;
                     case 2:
-                        mZone.setTextColor(Color.rgb(49, 23, 227));
+                        LayoutZone.setBackgroundResource(R.drawable.oval_blue);
                         z2++;
                         break;
                     case 3:
-                        mZone.setTextColor(Color.rgb(235, 198, 48));
+                        LayoutZone.setBackgroundResource(R.drawable.oval_yellow);
                         z3++;
                         break;
                     case 4:
-                        mZone.setTextColor(Color.rgb(234, 0, 0));
+                        LayoutZone.setBackgroundResource(R.drawable.oval_red);
                         z4++;
                         break;
                 }

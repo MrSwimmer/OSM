@@ -1,38 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:paddingLeft="17dp"
+              android:paddingTop="10dp">
 
-    <TextView
-        android:id="@+id/list_item_z_point"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:padding="4dp"
-        tools:text="Points"
-        />
-
-    <TextView
-        android:id="@+id/list_item_z_radio_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/list_item_z_date_text_view"
-        android:layout_toLeftOf="@+id/list_item_z_point"
-        android:padding="4dp"
-        tools:text="Radio set"
-        />
-
-    <TextView
-        android:id="@+id/list_item_z_zone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/list_item_z_point"
-        android:padding="4dp"
-        tools:text="Zone"/>
-
+        android:orientation="vertical">
     <TextView
         android:id="@+id/list_item_z_date_text_view"
         android:layout_width="wrap_content"
@@ -42,4 +20,53 @@
         android:layout_alignParentTop="true"
         android:padding="4dp"
         tools:text="Z Date"/>
-</RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/list_item_z_radio_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_item_z_date_text_view"
+        android:layout_toLeftOf="@+id/list_item_z_point"
+        android:padding="4dp"
+        tools:text="Radio set"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="150dp">
+
+        <TextView
+            android:id="@+id/list_item_z_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:padding="6dp"
+            tools:text="Points"
+            />
+
+        <LinearLayout
+            android:id="@+id/layout_zone"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/list_item_z_zone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/list_item_z_point"
+                android:padding="6dp"
+                tools:text="Zone"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
