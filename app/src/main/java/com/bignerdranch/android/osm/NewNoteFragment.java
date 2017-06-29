@@ -311,6 +311,7 @@ public class NewNoteFragment extends Fragment {
 
             }
         });
+
         mButtonDate = (Button) v.findViewById(R.id.note_date);
         //mButtonDate.setText(mNote.getDate().toString());
         mButtonDate.setOnClickListener(new View.OnClickListener() {
@@ -348,7 +349,8 @@ public class NewNoteFragment extends Fragment {
         mScrollView = (ScrollView) v.findViewById(R.id.scroll);
         mSaveAll = (Button) v.findViewById(R.id.save);
         AboutZone = (TextView) v.findViewById(R.id.textLetZone);
-        if (mNote.getPsit() != null && mNote.getPstand() != null) {
+
+        if ((mNote.getPsit() != null && mNote.getPstand() != null)) {
             mZoneBallView.setVisibility(View.VISIBLE);
             secondCircularImageBar(mZoneBallView, mNote.getZone(), mNote.getPoint());
             mButtonDate.setVisibility(View.VISIBLE);
