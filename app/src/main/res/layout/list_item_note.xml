@@ -3,6 +3,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:background="@drawable/bottom_line"
               android:orientation="horizontal"
               android:paddingLeft="17dp"
               android:paddingTop="10dp">
@@ -18,7 +19,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:padding="4dp"
+        android:layout_marginBottom="4dp"
+
+        android:textAppearance="@style/TextAppearance.AppCompat"
         tools:text="Z Date"/>
 
 
@@ -27,18 +30,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_z_date_text_view"
+        android:layout_marginBottom="5dp"
         android:layout_toLeftOf="@+id/list_item_z_point"
-        android:padding="4dp"
-        tools:text="Radio set"
-        />
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        tools:text="Radio set"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:paddingLeft="150dp">
+        android:paddingLeft="120dp">
 
         <TextView
             android:id="@+id/list_item_z_point"
@@ -47,22 +51,26 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:padding="6dp"
-            tools:text="Points"
-            />
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            tools:text="Points"/>
 
         <LinearLayout
             android:id="@+id/layout_zone"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:orientation="vertical"
+            >
 
             <TextView
                 android:id="@+id/list_item_z_zone"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/list_item_z_point"
-                android:padding="6dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat"
                 tools:text="Zone"/>
         </LinearLayout>
 

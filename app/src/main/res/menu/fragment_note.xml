@@ -12,4 +12,5 @@
         android:icon="@android:drawable/ic_dialog_email"
         android:title="Отправить результаты"
         app:showAsAction="ifRoom|withText"/>
+
 </menu>

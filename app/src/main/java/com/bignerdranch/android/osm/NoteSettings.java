@@ -30,6 +30,7 @@ public class NoteSettings extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private TextView mButton;
     private TextView mMark;
+    private TextView Email;
     private TextView mEnterRegButton;
     private String str = null;
     private TextView mVer;
@@ -53,6 +54,7 @@ public class NoteSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_note);
         mAuth = FirebaseAuth.getInstance();
+        Email = (TextView) findViewById(R.id.email);
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -60,7 +62,8 @@ public class NoteSettings extends AppCompatActivity {
                 if (user != null) {
                     String email = user.getEmail();
                     Log.i("LOG", email);
-                    mEnterRegButton.setText("Вход выполнен!\n" + email);
+                    mEnterRegButton.setText("Вход выполнен!");
+                    Email.setText(email);
                     // User is signed in
                 } else {
                     // User is signed out

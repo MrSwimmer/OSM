@@ -23,7 +23,7 @@ import java.io.File;
 
 public class SplashScreenActivity extends Activity {
     // Время в милесекундах, в течение которого будет отображаться Splash Screen
-    private final int SPLASH_DISPLAY_LENGTH = 2000;
+    private final int SPLASH_DISPLAY_LENGTH = 3000;
     StorageReference riversRef;
     FirebaseUser user;
     private String[] tip = new String[3];

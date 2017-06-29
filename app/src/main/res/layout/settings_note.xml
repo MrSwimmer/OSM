@@ -4,83 +4,104 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingLeft="6dp"
-                android:paddingTop="10dp"
                 android:weightSum="1">
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:background="@drawable/bottom_line"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/buttonDel"
             style="@style/Widget.AppCompat.ListView.Menu"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:paddingBottom="15sp"
-            android:paddingTop="15dp"
+            android:background="@drawable/bottom_line"
+            android:padding="15dp"
             android:text="Удаление всех записей"
-            android:textSize="22sp"
-            />
+            android:textSize="22sp"/>
 
         <TextView
             android:id="@+id/buttonMark"
             style="@style/Widget.AppCompat.ListMenuView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/buttonDel"
+            android:background="@drawable/bottom_line"
+            android:padding="15dp"
             android:paddingBottom="15sp"
             android:paddingTop="15dp"
             android:text="Оценить нас в Google Play"
             android:textSize="22sp"/>
 
-        <TextView
-            android:id="@+id/textView"
-            style="@style/Widget.AppCompat.ListMenuView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:text="Версия приложения"
-            android:textSize="22sp"
-            />
+            android:background="@drawable/bottom_line"
+            android:orientation="vertical"
+            android:padding="15dp">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="12dp"
-            android:text="v1.5"
-            android:textSize="22sp"/>
+            <TextView
+                android:id="@+id/textView"
+                style="@style/Widget.AppCompat.ListMenuView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Версия приложения"
+                android:textSize="22sp"
+                />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="v2.0"
+                android:textSize="22sp"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/buttonVer"
             style="@style/Widget.AppCompat.ListView.Menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:paddingBottom="15sp"
-            android:paddingTop="15dp"
-            android:text="О версии"
-            android:textSize="22sp"
-
-            />
-
-        <TextView
-            android:id="@+id/EnterRegBut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingRight="15dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/bottom_line"
+            android:padding="15dp"
+            android:paddingBottom="15sp"
             android:paddingTop="15dp"
-            android:text="Вход / Регистрация"
-            android:textAppearance="@style/TextAppearance.AppCompat"
+
+            android:text="О версии"
             android:textSize="22sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_line"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/EnterRegBut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Вход / Регистрация"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="22sp"/>
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"/>
+        </LinearLayout>
+
     </LinearLayout>
 
     <com.google.android.gms.ads.AdView

@@ -44,8 +44,8 @@
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="40dp"
                     app:srcCompat="@drawable/timer"/>

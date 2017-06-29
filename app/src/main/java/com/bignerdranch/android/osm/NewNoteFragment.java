@@ -154,7 +154,7 @@ public class NewNoteFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_note, menu);
+        inflater.inflate(R.menu.new_fragment_note, menu);
     }
 
     @Override
@@ -359,6 +359,7 @@ public class NewNoteFragment extends Fragment {
             InfoZone.setVisibility(View.VISIBLE);
             mResView.setVisibility(View.VISIBLE);
             mSaveAll.setVisibility(View.VISIBLE);
+            mScrollView.scrollTo((int) mZoneBallView.getX(), (int) mZoneBallView.getY() - 100);
             switch (mNote.getZone()) {
                 case 1:
                     Zone.setText(R.string.zone_1t);
@@ -377,7 +378,7 @@ public class NewNoteFragment extends Fragment {
                     AboutZone.setText(R.string.zone_4);
                     break;
             }
-            mScrollView.scrollTo((int) mZoneBallView.getX(), (int) mZoneBallView.getY() - 70);
+            mScrollView.scrollTo((int) mZoneBallView.getX(), (int) mZoneBallView.getY() - 100);
         }
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -395,6 +396,7 @@ public class NewNoteFragment extends Fragment {
                     InfoZone.setVisibility(View.VISIBLE);
                     mResView.setVisibility(View.VISIBLE);
                     mSaveAll.setVisibility(View.VISIBLE);
+                    mScrollView.scrollTo((int) mZoneBallView.getX(), (int) mZoneBallView.getY() - 100);
                     switch (mNote.getZone()) {
                         case 1:
                             Zone.setText(R.string.zone_1t);
@@ -413,7 +415,7 @@ public class NewNoteFragment extends Fragment {
                             AboutZone.setText(R.string.zone_4);
                             break;
                     }
-                    mScrollView.scrollTo((int) mZoneBallView.getX(), (int) mZoneBallView.getY() - 70);
+                    mScrollView.scrollTo((int) mZoneBallView.getX(), (int) mZoneBallView.getY() - 100);
                 }
             }
         });
@@ -458,7 +460,6 @@ public class NewNoteFragment extends Fragment {
         NoteLab.get(getActivity())
                 .updateNote(mNote);
     }
-
     private String getNoteReport() {
         String radioString = null;
         if (mNote.isRad()) {

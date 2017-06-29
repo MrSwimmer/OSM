@@ -1,10 +1,10 @@
 package com.bignerdranch.android.osm;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
  * Created by Севастьян on 13.05.2017.
  */
 
-public class LogInActivity extends Activity implements View.OnClickListener {
+public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
     String action = "auth";
     FirebaseUser user;
     private FirebaseAuth mAuth;

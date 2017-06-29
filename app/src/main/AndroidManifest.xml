@@ -50,7 +50,7 @@
             android:label="Ортостатический мониторинг"
             />
         <activity android:name=".LogInActivity"
-                  android:parentActivityName=".MainActivity"
+                  android:parentActivityName=".NoteSettings"
             />
         <activity android:name=".SucEnter"
                   android:label=""
