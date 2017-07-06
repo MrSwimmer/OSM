@@ -1,12 +1,10 @@
 package com.bignerdranch.android.osm;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -97,7 +95,7 @@ public class NoteListFragment extends Fragment {
         } else {
             mAdapter.notifyDataSetChanged();
         }
-        updateSubtitle();
+        //updateSubtitle();
 
     }
 
@@ -105,12 +103,12 @@ public class NoteListFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_note_list, menu);
-        MenuItem subtitleItem = menu.findItem(R.id.menu_item_show_subtitle);
-        if (mSubtitleVisible) {
-            subtitleItem.setTitle(R.string.hide_subtitle);
-        } else {
-            subtitleItem.setTitle(R.string.show_subtitle);
-        }
+//        MenuItem subtitleItem = menu.findItem(R.id.menu_item_show_subtitle);
+//        if (mSubtitleVisible) {
+//            subtitleItem.setTitle(R.string.hide_subtitle);
+//        } else {
+//            subtitleItem.setTitle(R.string.show_subtitle);
+//        }
     }
 
     @Override
@@ -143,11 +141,11 @@ public class NoteListFragment extends Fragment {
                 Intent intent = NotePagerActivity.newIntent(getActivity(), note.getId());
                 startActivity(intent);
                 return true;*/
-            case R.id.menu_item_show_subtitle:
-                mSubtitleVisible = !mSubtitleVisible;
-                getActivity().invalidateOptionsMenu();
-                updateSubtitle();
-                return true;
+//            case R.id.menu_item_show_subtitle:
+//                mSubtitleVisible = !mSubtitleVisible;
+//                getActivity().invalidateOptionsMenu();
+//                updateSubtitle();
+//                return true;
             case R.id.sortDateU:
                 sort = "DATE DESC";
                 updateUI();
@@ -190,17 +188,17 @@ public class NoteListFragment extends Fragment {
         }
     }
 
-    private void updateSubtitle() {
-        NoteLab noteLab = NoteLab.get(getActivity());
-        int noteCount = noteLab.getNotes().size();
-        @SuppressLint("StringFormatMatches") String subtitle = getString(R.string.subtitle_format, noteCount);
-        if (!mSubtitleVisible) {
-            subtitle = null;
-        }
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setSubtitle(subtitle);
-
-    }
+//    private void updateSubtitle() {
+//        NoteLab noteLab = NoteLab.get(getActivity());
+//        int noteCount = noteLab.getNotes().size();
+//        @SuppressLint("StringFormatMatches") String subtitle = getString(R.string.subtitle_format, noteCount);
+//        if (!mSubtitleVisible) {
+//            subtitle = null;
+//        }
+//        AppCompatActivity activity = (AppCompatActivity) getActivity();
+//        activity.getSupportActionBar().setSubtitle(subtitle);
+//
+//    }
 
     private class NoteHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mDateTextView;

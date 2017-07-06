@@ -14,6 +14,7 @@
     <string name="delete_note">Удалить запись</string>
     <string name="delete_picker_title">Удалить запись?</string>
     <string name="zone_1t">I зона («востановительная»)</string>
+    <string name="default_text">--</string>
     <string name="zone_1">Нет признаков напряжения в работе функциональных систем</string>
     <string name="zone_2t">II зона («недовосстановления» - до начала занятия, «зона малой нагрузки» - на момент завершения занятия)</string>
     <string name="zone_2">Некоторые признаки напряжения</string>
