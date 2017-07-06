@@ -53,7 +53,7 @@ public class NoteFragment extends Fragment {
     private RadioButton mRadioButtonTrain;
     private Chronometer mChronometer;
     private ImageView mButtonStart;
-    private Button mButtonStop;
+    private Button scanPuls;
     private ImageView mButtonReset;
     private Boolean actVib = false;
     private AdView mAdView;
@@ -127,6 +127,7 @@ public class NoteFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_note, container, false);
         mPsit = (EditText) v.findViewById(R.id.p_sit);
         mPsit.setText(mNote.getPsit());
+
         mChronometer = (Chronometer) v.findViewById(R.id.chronometer);
         mChronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override

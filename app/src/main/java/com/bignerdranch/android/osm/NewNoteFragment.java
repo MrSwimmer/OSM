@@ -32,6 +32,8 @@ import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.bignerdranch.android.osm.puls.Pulsometro;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -68,6 +70,7 @@ public class NewNoteFragment extends Fragment {
     private ImageView mChrono;
     private ImageView mZoneBallView;
     private Boolean actVib = false;
+    private Button scanPuls;
 
     public static NewNoteFragment newInstance(UUID noteId) {
         Bundle args = new Bundle();
@@ -240,6 +243,14 @@ public class NewNoteFragment extends Fragment {
                 }
             }
         });
+        scanPuls = (Button) v.findViewById(R.id.Scan);
+        scanPuls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), Pulsometro.class);
+                startActivity(i);
+            }
+        });
 //        mButtonStop = (Button) findViewById(R.id.buttonStop);
 //        mButtonStop.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -254,7 +265,6 @@ public class NewNoteFragment extends Fragment {
 //                onStopClick();
 //            }
 //        });
-
         mPsit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

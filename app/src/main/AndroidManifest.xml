@@ -38,7 +38,10 @@
         <activity
             android:name=".SplashScreenActivity"
             android:label="Ортостатический мониторинг">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".Statistic"
@@ -86,10 +89,7 @@
             />
         <activity android:name=".puls.Pulsometro"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".NoteVersion"

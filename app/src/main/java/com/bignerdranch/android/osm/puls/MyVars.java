@@ -5,6 +5,8 @@ import android.os.PowerManager.WakeLock;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -22,6 +24,8 @@ public class MyVars {
     static SurfaceHolder viewFinderHolder = null;
     static Camera camera = null;
     static View image = null;
+    static Chronometer chrono = null;
+    static ImageView start = null;
     static TextView text = null;
     static WakeLock wakeLock = null;
     static int indexAVG = 0;

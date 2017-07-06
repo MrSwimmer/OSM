@@ -200,17 +200,34 @@
             </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="201dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginBottom="20dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/ovalshape"
-            android:text="Посчитать балл"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"/>
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.55"
+                android:background="@drawable/ovalshape"
+                android:text="Посчитать балл"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/Scan"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="167dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="измерить пульс камерой"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/restext"
