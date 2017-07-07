@@ -2,26 +2,28 @@ package com.bignerdranch.android.osm.puls;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.hardware.Camera.PreviewCallback;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.Chronometer;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.bignerdranch.android.osm.Note;
+import com.bignerdranch.android.osm.NoteLab;
+import com.bignerdranch.android.osm.NotePagerActivity;
 import com.bignerdranch.android.osm.R;
-import com.bignerdranch.android.osm.VibrateService;
 import com.bignerdranch.android.osm.puls.MyVars.TYPE;
+
+import java.util.UUID;
 
 //import com.bignerdranch.android.osm.puls.Browser;
 
@@ -29,6 +31,10 @@ import com.bignerdranch.android.osm.puls.MyVars.TYPE;
 
 
 public class Pulsometro extends Activity {
+    static public String text = "";
+    static int beatsArrayAvg = 0;
+    static int beatsArrayCnt = 0;
+    static int beatsAvg = 0;
     private static PreviewCallback previewCallback = new PreviewCallback() {
 
         /**
@@ -89,7 +95,7 @@ public class Pulsometro extends Activity {
                 int dpm = (int) (bps * 60d);
                 if (dpm < 30 || dpm > 180) {
                     MyVars.startTime = System.currentTimeMillis();
-                    int beats = (int) MyVars.beats;
+                    int beat = (int) MyVars.beats;
                     MyVars.beats = 0;
                     MyVars.processing.set(false);
 
@@ -106,19 +112,17 @@ public class Pulsometro extends Activity {
                 MyVars.beatsArray[MyVars.beatsIndex] = dpm;
                 MyVars.beatsIndex++;
 
-                int beatsArrayAvg = 0;
-                int beatsArrayCnt = 0;
+
                 for (int i = 0; i < MyVars.beatsArray.length; i++) {
                     if (MyVars.beatsArray[i] > 0) {
                         beatsArrayAvg += MyVars.beatsArray[i];
                         beatsArrayCnt++;
                     }
                 }
-                int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
+                beatsAvg = (beatsArrayAvg / beatsArrayCnt);
                 MyVars.text.setText(String.valueOf(beatsAvg));
                 MyVars.startTime = System.currentTimeMillis();
                 MyVars.beats = 0;
-
 
             }
 
@@ -140,7 +144,6 @@ public class Pulsometro extends Activity {
                 //Log.e("PreviewDemo-surfaceCallback", "Exception in setPreviewDisplay()", t);
             }
         }
-
         /**
          * {@inheritDoc}
          */
@@ -165,11 +168,21 @@ public class Pulsometro extends Activity {
             // Ignore
         }
     };
+    public int p1 = 0, p2 = 0;
     public int mas = 0;
+    boolean pressed = false;
+    ClipData myClip;
+    ClipboardManager myClipboard;
+    /**
+     * {@inheritDoc}
+     */
+    String id;
     private Boolean actVib = false;
     private Boolean sec = true;
     private int count = 1;
     private long onesec = 0;
+    private Note mNote;
+    private NoteLab mNoteLab;
 
     @SuppressLint("NewApi")
     private static Camera.Size getSmallestPreviewSize(int width, int height, Camera.Parameters parameters) {
@@ -191,15 +204,13 @@ public class Pulsometro extends Activity {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @SuppressWarnings("deprecation")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
+        Intent intent = getIntent();
+        id = intent.getStringExtra("id");
         MyVars.viewFinder = (SurfaceView) findViewById(R.id.preview);
         MyVars.viewFinderHolder = MyVars.viewFinder.getHolder();
         MyVars.viewFinderHolder.addCallback(surfaceCallback);
@@ -207,70 +218,39 @@ public class Pulsometro extends Activity {
 
         MyVars.image = findViewById(R.id.image);
         MyVars.text = (TextView) findViewById(R.id.text);
-        MyVars.chrono = (Chronometer) findViewById(R.id.chrono_puls);
-        MyVars.start = (ImageView) findViewById(R.id.start_but);
-        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        MyVars.wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotDimScreen");
-        MyVars.chrono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-            @Override
-            public void onChronometerTick(Chronometer chronometer) {
-                long elapsedMillis = SystemClock.elapsedRealtime()
-                        - MyVars.chrono.getBase();
-                long onesec = SystemClock.elapsedRealtime()
-                        - MyVars.chrono.getBase();
-                if (onesec >= 1000) {
-                    onesec = 0;
-                    mas = (mas + Integer.parseInt(MyVars.text.getText().toString())) / count;
-                    try {
-                        Toast.makeText(getApplicationContext(), mas, Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
-                    }
-                    //Toast.makeText(getApplicationContext(), mas, Toast.LENGTH_LONG).show();
-                    count++;
-                }
-                if (elapsedMillis > 15000) {
-                    elapsedMillis = 0;
-                    MyVars.chrono.stop();
-                }
-                if (elapsedMillis >= 15000 && !actVib) {
-                    actVib = true;
-                    Intent intentVibrate = new Intent(Pulsometro.this, VibrateService.class);
-                    Pulsometro.this.startService(intentVibrate);
-                }
-            }
-        });
-        MyVars.start.setOnClickListener(new View.OnClickListener() {
+        MyVars.save = (Button) findViewById(R.id.add_puls);
+        MyVars.save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (sec) {
-                    onStartClick();
-                    MyVars.start.setImageResource(R.drawable.stop);
-                    sec = !sec;
+                if (!pressed) {
+                    p1 = beatsAvg;
+                    pressed = !pressed;
                 } else {
-                    onStopClick();
-                    MyVars.start.setImageResource(R.drawable.start);
-                    sec = !sec;
+                    p2 = beatsAvg;
+                    Log.i("LOL", String.valueOf(p1) + String.valueOf(p2));
+                    mNote = NoteLab.get(Pulsometro.this).getNote(UUID.fromString(id));
+                    mNote.setPsit(String.valueOf(p1));
+                    mNote.setPstand(String.valueOf(p2));
+//                    myClipboard = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+                    Intent intent = NotePagerActivity.newIntent(Pulsometro.this, UUID.fromString(id));
+//                    myClip = ClipData.newPlainText("text", p1+" "+p2);
+//                    ClipData abc = myClipboard.getPrimaryClip();
+//                    ClipData.Item item = abc.getItemAt(0);
+//                    text = item.getText().toString();
+//                    myClipboard.setPrimaryClip(myClip);
+//                    intent.putExtra("p1", p1);
+//                    intent.putExtra("p2", p2);
+                    text = p1 + " " + p2;
+                    startActivity(intent);
+                    //finish();
                 }
             }
         });
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        MyVars.wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotDimScreen");
+
     }
 
-    public void onStartClick() {
-        MyVars.chrono.setBase(SystemClock.elapsedRealtime());
-        MyVars.chrono.start();
-    }
-
-    public void onStopClick() {
-        MyVars.chrono.stop();
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
 
     /**
      * {@inheritDoc}

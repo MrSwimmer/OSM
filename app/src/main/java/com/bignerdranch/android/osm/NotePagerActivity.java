@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 
 public class NotePagerActivity extends AppCompatActivity {
-    private static final String EXTRA_NOTE_ID = "com.bignerdranch.android.osm.crime_id";
+    private static final String EXTRA_NOTE_ID = "crime_id";
     private ViewPager mViewPager;
     private List<Note> mNotes;
 

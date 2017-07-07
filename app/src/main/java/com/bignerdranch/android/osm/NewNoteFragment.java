@@ -46,6 +46,8 @@ public class NewNoteFragment extends Fragment {
     private static final String ARG_NOTE_ID = "note_id";
     private static final int REQUEST_DATE = 0;
     private static final String DIALOG_DATE = "DialogDate";
+    private static final String NOTE_ID = "id";
+    String p1 = null, p2 = null;
     private Note mNote;
     private LinearLayout InfoZone;
     private LinearLayout Chss1, Chss2;
@@ -120,6 +122,7 @@ public class NewNoteFragment extends Fragment {
         canvas.drawText(s, 225, 225 + (paint.getTextSize() / 3), paint);
         iv2.setImageBitmap(b);
     }
+
     private void circularImageBar(ImageView iv2, int i) {
 
         Bitmap b = Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888);
@@ -150,7 +153,13 @@ public class NewNoteFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         UUID noteId = (UUID) getArguments().getSerializable(ARG_NOTE_ID);
+
+//        p1 = getArguments().getString("p1");
+//        p2 = getArguments().getString("p2");
+//        Log.i("LOL", p1+p2);
         mNote = NoteLab.get(getActivity()).getNote(noteId);
+//        mNote.setPsit(p1);
+//        mNote.setPstand(p2);
         setHasOptionsMenu(true);
     }
 
@@ -248,7 +257,10 @@ public class NewNoteFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), Pulsometro.class);
+                Log.i("LOL", String.valueOf(mNote.getId()));
+                i.putExtra("id", mNote.getId().toString());
                 startActivity(i);
+                //getActivity().finish();
             }
         });
 //        mButtonStop = (Button) findViewById(R.id.buttonStop);
@@ -466,9 +478,35 @@ public class NewNoteFragment extends Fragment {
         }
     }
 
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        NoteLab.get(getActivity())
+//                .updateNote(mNote);
+    //}
+
+
+
+
+
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onResume() {
+        super.onResume();
+        try {
+            Log.i("LOL", Pulsometro.text);
+        } catch (Exception e) {
+            Log.i("LOL", e.toString());
+        }
+        if (Pulsometro.text != "") {
+            int buf = 2;
+            for (int i = 0; i < Pulsometro.text.length(); i++) {
+                if (Pulsometro.text.charAt(i) == ' ')
+                    buf = i;
+            }
+            mPsit.setText(Pulsometro.text.substring(0, buf));
+            mPstand.setText(Pulsometro.text.substring(buf + 1, Pulsometro.text.length()));
+        }
+
         NoteLab.get(getActivity())
                 .updateNote(mNote);
     }
